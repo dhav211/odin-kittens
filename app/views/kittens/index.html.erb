@@ -1,0 +1,11 @@
+<h1>Here's The Kittens!</h1>
+<ul>
+    <% @kittens.each do |kitten| %>
+        <h2><%= kitten.name %></h2>
+        <p><b>Age:</b> <%= kitten.age %> months</p>
+        <p><b>Cuteness:</b> <%= kitten.cuteness %></p>
+        <p><b>Softness:</b> <%= kitten.softness %></p>
+        <%= image_tag kitten.image_url %>
+        <hr>
+    <% end %>
+</ul>

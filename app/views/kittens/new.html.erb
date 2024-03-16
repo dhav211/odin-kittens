@@ -1,1 +1,10 @@
-<h1>NEW KITTEN</h1>
+<h2>Add A Kitten</h2>
+<%= form_with model: @kitten do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <br>
+  <%= form.label :main_image %>
+  <%= form.file_field :main_image %>
+
+  <%= form.submit %>
+<% end %>

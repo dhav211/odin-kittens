@@ -4,12 +4,11 @@
 #
 #  id         :integer          not null, primary key
 #  age        :integer
-#  cuteness   :integer
-#  image_url  :string
 #  name       :string
-#  softness   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 class Kitten < ApplicationRecord
+  has_one_attached :main_image
+  has_many_attached :images
 end

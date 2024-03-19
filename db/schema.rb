@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_14_020314) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_19_035818) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,13 +39,45 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_020314) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "image_posts", force: :cascade do |t|
+    t.integer "media_id"
+    t.text "body"
+    t.integer "kitten_id", null: false
+    t.integer "owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kitten_id"], name: "index_image_posts_on_kitten_id"
+    t.index ["owner_id"], name: "index_image_posts_on_owner_id"
+  end
+
   create_table "kittens", force: :cascade do |t|
     t.string "name"
     t.integer "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "main_image_id"
+    t.integer "owner_id"
+    t.integer "image_posts_id"
+    t.index ["image_posts_id"], name: "index_kittens_on_image_posts_id"
+  end
+
+  create_table "owners", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "username"
+    t.integer "kittens_id"
+    t.index ["email"], name: "index_owners_on_email", unique: true
+    t.index ["kittens_id"], name: "index_owners_on_kittens_id"
+    t.index ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "image_posts", "kittens"
+  add_foreign_key "image_posts", "owners"
+  add_foreign_key "kittens", "image_posts", column: "image_posts_id"
+  add_foreign_key "owners", "kittens", column: "kittens_id"
 end

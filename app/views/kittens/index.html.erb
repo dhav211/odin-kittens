@@ -4,7 +4,7 @@
             <h2><%= link_to kitten.name, kitten %></h2>
             <p><b>Age:</b> <%= kitten.age %> months</p>
         </div>
-        <%= image_tag kitten.main_image, class: "kitten-picture" %>
+        <%= image_tag kitten.images.find(kitten.main_image_id), class: "kitten-picture" %>
         <hr>
     <% end %>
     <%= link_to "Add New Kitten", new_kitten_path %>

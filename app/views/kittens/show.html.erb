@@ -1,11 +1,16 @@
+<%= image_tag @kitten.main_image, class: "kitten-picture" %>
 <div class="stat-box">
   <h2><%= @kitten.name %></h2>
   <p><b>Age:</b> <%= @kitten.age %> months</p>
 </div>
-<%= image_tag @kitten.main_image, class: "kitten-picture" %>
+<% if @kitten.images.empty? %>
+  <p>No images of this poor kitten!</p>
+<% else %>
 
-<% @kitten.images.each do |image| %>
-  <%= image_tag image, class: "kitten-picture" %>
+  <% @kitten.images.each do |image| %>
+    <%= image_tag image, class: "kitten-picture" %>
+  <% end %>
+
 <% end %>
 
 <%= form_with model: @kitten do |form| %>

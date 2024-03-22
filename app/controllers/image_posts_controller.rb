@@ -18,6 +18,7 @@ class ImagePostsController < ApplicationController
 
   def show
     @post = ImagePost.find params[:id]
+    @kitten = @post.kitten
   end
 
   private

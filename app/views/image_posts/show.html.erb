@@ -1,1 +1,4 @@
 <%= image_tag @post.image, class: "post-pic" %>
+<% if current_user_kitten_owner? @kitten %>
+    YEP!
+<% end %>

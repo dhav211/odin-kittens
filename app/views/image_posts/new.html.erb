@@ -1,0 +1,13 @@
+<% if @post.errors.full_messages.present? %>
+  <p>You need to choose an image!</p>
+<% end %>
+
+<%= form_with model: @post, url: kitten_image_posts_path do |form| %>
+  <%= form.label "Upload An Image" %>
+  <%= form.file_field :image %>
+  <br>
+  <%= form.label :body %>
+  <%= form.text_area :body %>
+  <br>
+  <%= form.submit "Upload" %>
+<% end %>

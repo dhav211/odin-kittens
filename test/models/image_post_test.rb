@@ -2,13 +2,10 @@
 #
 # Table name: image_posts
 #
-#  id         :integer          not null, primary key
-#  body       :text
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  kitten_id  :integer          not null
-#  media_id   :integer
-#  owner_id   :integer          not null
+#  id        :integer          not null, primary key
+#  body      :text
+#  kitten_id :integer          not null
+#  owner_id  :integer          not null
 #
 # Indexes
 #

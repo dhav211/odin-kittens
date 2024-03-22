@@ -2,13 +2,10 @@
 #
 # Table name: image_posts
 #
-#  id         :integer          not null, primary key
-#  body       :text
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  kitten_id  :integer          not null
-#  media_id   :integer
-#  owner_id   :integer          not null
+#  id        :integer          not null, primary key
+#  body      :text
+#  kitten_id :integer          not null
+#  owner_id  :integer          not null
 #
 # Indexes
 #
@@ -23,4 +20,11 @@
 class ImagePost < ApplicationRecord
   belongs_to :kitten
   belongs_to :owner
+  has_one_attached :image
+
+  validate :acceptable_image
+
+  def acceptable_image
+    errors.add(:title, 'must upload image') unless image.attached?
+  end
 end

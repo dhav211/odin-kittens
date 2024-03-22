@@ -6,16 +6,11 @@
 <% if @kitten.images.empty? %>
   <p>No images of this poor kitten!</p>
 <% else %>
-
-  <% @kitten.images.each do |image| %>
-    <%= image_tag image, class: "kitten-picture" %>
-  <% end %>
-
+  <div class="post-pic-link-grid">
+    <% @kitten.images.each do |image| %>
+      <%= link_to(image_tag(image, class: "post-pic-link"), kitten_image_post_path(@kitten, ImagePost.find_by(id:image.record_id))) %>
+    <% end %>
+  </div>
 <% end %>
 
-<%= form_with model: @kitten do |form| %>
-  <%= form.label "Upload Another Image" %>
-  <%= form.file_field :images %>
-
-  <%= form.submit "Upload" %>
-<% end %>
+<%= link_to 'Add Another Post', new_kitten_image_post_path(@kitten) %>

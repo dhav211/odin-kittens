@@ -23,7 +23,7 @@ class Kitten < ApplicationRecord
   belongs_to :owner
   has_many :image_posts
 
-  has_many_attached :images
+  has_many :images, through: :image_posts, source: :image_attachment
 
   def main_image
     img = images.find_by(id: main_image_id)

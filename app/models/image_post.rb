@@ -25,9 +25,18 @@ class ImagePost < ApplicationRecord
 
   validate :acceptable_image
 
-  scope :next, -> { where('created_at > ?', created_at).first }
+  scope :next, ->(post) { post.kitten.image_posts.where('id > ?', post.id).first }
+  scope :previous, ->(post) { post.kitten.image_posts.where('id < ?', post.id).last }
 
   def acceptable_image
     errors.add(:title, 'must upload image') unless image.attached?
+  end
+
+  def first?
+    ImagePost.first.id == id
+  end
+
+  def last?
+    ImagePost.last.id == id
   end
 end

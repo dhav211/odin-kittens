@@ -18,6 +18,14 @@ ul {
     padding: 0 0;
 }
 
+.notice {
+    background-color: #9AE19D;
+}
+
+.alert {
+    background-color: #FC7753;
+}
+
 .logo-image {
     width: min(600px, 100%);
     height: auto;

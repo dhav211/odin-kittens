@@ -4,9 +4,9 @@
   <div class="post-body"><%= @post.body %></div>
 <% end %>
 <span>
-  <%= link_to 'Previous' %>
+  <% unless @post.first? %> <%= link_to 'Previous', kitten_image_post_path(@kitten, ImagePost.previous(@post)) %> <% end %>
   <%= link_to 'Back To Kitten\'s Page', @kitten %>
-  <%= link_to 'Next' %>
+  <% unless @post.last? %> <%= link_to 'Next', kitten_image_post_path(@kitten, ImagePost.next(@post)) %> <% end %>
 </span>
 <% if current_user_kitten_owner? @kitten %>
   <div class="manage-image-post-container">

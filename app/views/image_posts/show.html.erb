@@ -3,6 +3,11 @@
 <% unless @post.body.nil? %>
   <div class="post-body"><%= @post.body %></div>
 <% end %>
+<span>
+  <%= link_to 'Previous' %>
+  <%= link_to 'Back To Kitten\'s Page', @kitten %>
+  <%= link_to 'Next' %>
+</span>
 <% if current_user_kitten_owner? @kitten %>
   <div class="manage-image-post-container">
     <span>

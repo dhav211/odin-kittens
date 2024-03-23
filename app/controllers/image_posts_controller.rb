@@ -26,6 +26,14 @@ class ImagePostsController < ApplicationController
   end
 
   def update
+    @post = ImagePost.find params[:id]
+    @kitten = @post.kitten
+
+    if @post.update allowed_params
+      redirect_to kitten_image_post_path(@kitten, @post), notice: 'Post edited sucessfully'
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

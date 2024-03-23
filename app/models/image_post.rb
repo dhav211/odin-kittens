@@ -25,6 +25,8 @@ class ImagePost < ApplicationRecord
 
   validate :acceptable_image
 
+  scope :next, -> { where('created_at > ?', created_at).first }
+
   def acceptable_image
     errors.add(:title, 'must upload image') unless image.attached?
   end

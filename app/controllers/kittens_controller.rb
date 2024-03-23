@@ -11,7 +11,9 @@ class KittensController < ApplicationController
     @kitten = Kitten.new allowed_params
 
     if @kitten.save
-      redirect_to @kitten
+      redirect_to @kitten, notice: 'Your kitten has been added!'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -22,10 +24,17 @@ class KittensController < ApplicationController
   def update
     @kitten = Kitten.find_by id: params[:id]
 
-    if @kitten.update allowed_params
-      @kitten.images.attach params[:kitten][:images] if params.dig(:kitten, :images).present?
-      redirect_to @kitten
-    end
+    return unless @kitten.update allowed_params
+
+    @kitten.images.attach params[:kitten][:images] if params.dig(:kitten, :images).present?
+    redirect_to @kitten
+  end
+
+  def set_main_image
+    @kitten = Kitten.find_by id: params[:kitten_id]
+    post = ImagePost.find_by id: params[:id]
+    @kitten.update(main_image_id: post.image.id)
+    redirect_to @kitten
   end
 
   private

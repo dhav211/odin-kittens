@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_21_014056) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_23_163131) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -43,6 +43,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_014056) do
     t.integer "kitten_id", null: false
     t.integer "owner_id", null: false
     t.text "body"
+    t.string "title"
     t.index ["kitten_id"], name: "index_image_posts_on_kitten_id"
     t.index ["owner_id"], name: "index_image_posts_on_owner_id"
   end

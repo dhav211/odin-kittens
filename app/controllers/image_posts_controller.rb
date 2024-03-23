@@ -21,9 +21,24 @@ class ImagePostsController < ApplicationController
     @kitten = @post.kitten
   end
 
+  def edit
+    @post = ImagePost.find params[:id]
+  end
+
+  def update
+  end
+
+  def destroy
+    @post = ImagePost.find params[:id]
+    @kitten = @post.kitten
+
+    @post.destroy
+    redirect_to @kitten, status: :see_other, notice: 'Post Deleted!'
+  end
+
   private
 
   def allowed_params
-    params.require(:image_post).permit(:body, :image, :kitten_id, :owner)
+    params.require(:image_post).permit(:body, :title, :image, :kitten_id, :owner)
   end
 end

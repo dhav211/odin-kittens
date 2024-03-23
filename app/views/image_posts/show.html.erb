@@ -1,4 +1,14 @@
+<h2> <%= @post.title %> </h2>
 <%= image_tag @post.image, class: "post-pic" %>
+<% unless @post.body.nil? %>
+  <div class="post-body"><%= @post.body %></div>
+<% end %>
 <% if current_user_kitten_owner? @kitten %>
-    YEP!
+  <div class="manage-image-post-container">
+    <span>
+      <%= link_to 'Make Kitten\'s Profile Image', set_kitten_main_image_path, data: { turbo_method: :patch} %>
+      <%= link_to 'Edit Post', edit_kitten_image_post_path %>
+      <%= link_to 'Delete Post', kitten_image_post_path, data: { turbo_method: :delete } %>
+    </span>
+  </div>
 <% end %>

@@ -14,14 +14,18 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <main>
-      <%= image_tag "pink_logo.gif", class: 'logo-image' %>
       <% if owner_signed_in? %>
-        Hey there, <%= current_owner.username %>!
-        <%= link_to 'Sign Out', destroy_owner_session_path, data: { turbo_method: :delete } %>
+        <span>
+          Hey there, <%= current_owner.username %>!
+          <%= link_to 'Sign Out', destroy_owner_session_path, data: { turbo_method: :delete } %>
+        </span>
       <% else %>
-        <%= link_to 'Sign In', new_owner_session_path %>
-        <%= link_to 'Sign Up', new_owner_registration_path %>
+        <span>
+          <%= link_to 'Sign In', new_owner_session_path %>
+          <%= link_to 'Sign Up', new_owner_registration_path %>
+        </span>
       <% end %>
+      <%= image_tag "pink_logo.gif", class: 'logo-image' %>
       <%= yield %>
     </main>
   </body>

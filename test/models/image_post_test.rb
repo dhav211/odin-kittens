@@ -4,6 +4,7 @@
 #
 #  id        :integer          not null, primary key
 #  body      :text
+#  title     :string
 #  kitten_id :integer          not null
 #  owner_id  :integer          not null
 #

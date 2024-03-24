@@ -9,23 +9,26 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <main>
-      <% if owner_signed_in? %>
-        <span>
-          Hey there, <%= current_owner.username %>!
-          <%= link_to 'Sign Out', destroy_owner_session_path, data: { turbo_method: :delete } %>
-        </span>
-      <% else %>
-        <span>
-          <%= link_to 'Sign In', new_owner_session_path %>
-          <%= link_to 'Sign Up', new_owner_registration_path %>
-        </span>
-      <% end %>
+    <header>
       <%= link_to(image_tag("pink_logo.gif", class: 'logo-image'), root_path) %>
+      <div class="user-container">
+        <% if owner_signed_in? %>
+          <span>
+            Hey there, <%= current_owner.username %>!
+            <%= link_to 'Sign Out', destroy_owner_session_path, data: { turbo_method: :delete } %>
+          </span>
+        <% else %>
+          <span>
+            <%= link_to 'Sign In', new_owner_session_path %>
+            <%= link_to 'Sign Up', new_owner_registration_path %>
+          </span>
+        <% end %>
+      </div>
+    </header>
+    <main>
+      <% unless flash[:notice].nil? %> <p class="flash-container notice"><%= notice %></p> <% end %>
+      <% unless flash[:alert].nil? %> <p class="flash-container alert"><%= alert %></p> <% end %>
       <%= yield %>
     </main>
   </body>

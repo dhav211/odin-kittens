@@ -3,27 +3,52 @@ body {
     margin: 0 0;
 }
 
-main {
-    width: min(750px, 90%);
+header, main {
+    width: min(950px, 90%);
     margin: 0 auto;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main {
     padding: 0 .5rem;
     background-color: white;
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 1rem;
+    border-radius: 0 0 1rem 1rem;
 }
 
 ul {
-    width: min(500px, 100%);
+    width: min(700px, 100%);
     padding: 0 0;
 }
 
+.flash-container {
+    width: 100%;
+    padding: .5rem;
+    text-align: center;
+}
+
 .notice {
-    background-color: #9AE19D;
+    background-color: #9ae19d;
 }
 
 .alert {
     background-color: #FC7753;
+}
+
+.user-container {
+    width: 100%;
+    padding: 1rem 0.5rem;
+    background-color: #E0FBFC;
+    border-radius: 1rem 1rem 0 0;
+    text-align: right;
 }
 
 .logo-image {
@@ -32,13 +57,14 @@ ul {
 }
 
 .kitten-picture {
-    width: min(500px, 100%);
+    margin: 1rem 0;
+    width: min(700px, 100%);
     height: auto;
-    box-shadow: 0px 4px 8px 0px black;
+    border-radius: 1rem;
 }
 
 .stat-box {
-    width: min(500px, 100%);
+    width: min(700px, 100%);
     background-color: rgb(207, 207, 207);
     text-align: center;
     padding: 1rem;
@@ -49,7 +75,7 @@ ul {
 }
 
 .kitten-name {
-    width: 500px;
+    width: 700px;
     text-align: center;
 }
 

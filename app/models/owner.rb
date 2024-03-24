@@ -28,6 +28,7 @@ class Owner < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :kittens
+  has_many :followings, dependent: :destroy, class_name: 'Follower'
 
   validates :username, uniqueness: true
   validates :email, uniqueness: true

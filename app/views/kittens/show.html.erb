@@ -3,6 +3,7 @@
   <h2><%= @kitten.name %></h2>
   <p><b>Age:</b> <%= @kitten.age %> months</p>
 </div>
+<%= follow_or_unfollow_button(@kitten, @follower) %>
 <% if @kitten.images.empty? %>
   <p>No images of this poor kitten!</p>
 <% else %>

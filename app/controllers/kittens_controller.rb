@@ -19,6 +19,8 @@ class KittensController < ApplicationController
 
   def show
     @kitten = Kitten.find_by id: params[:id]
+    @signed_in_owner = current_owner
+    @follower = @kitten.followers.find_by owner_id:@signed_in_owner.id unless @signed_in_owner.nil?
   end
 
   def update

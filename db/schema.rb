@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_23_163131) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_24_020114) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_23_163131) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "followers", force: :cascade do |t|
+    t.integer "kitten_id", null: false
+    t.integer "owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kitten_id"], name: "index_followers_on_kitten_id"
+    t.index ["owner_id"], name: "index_followers_on_owner_id"
+  end
+
   create_table "image_posts", force: :cascade do |t|
     t.integer "kitten_id", null: false
     t.integer "owner_id", null: false
@@ -56,6 +65,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_23_163131) do
     t.integer "main_image_id"
     t.integer "owner_id"
     t.integer "image_posts_id"
+    t.integer "followers_id"
+    t.index ["followers_id"], name: "index_kittens_on_followers_id"
     t.index ["image_posts_id"], name: "index_kittens_on_image_posts_id"
   end
 
@@ -74,8 +85,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_23_163131) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "followers", "kittens"
+  add_foreign_key "followers", "owners"
   add_foreign_key "image_posts", "kittens"
   add_foreign_key "image_posts", "owners"
+  add_foreign_key "kittens", "followers", column: "followers_id"
   add_foreign_key "kittens", "image_posts", column: "image_posts_id"
   add_foreign_key "owners", "kittens", column: "kittens_id"
 end

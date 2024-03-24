@@ -7,21 +7,25 @@
 #  name           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  followers_id   :integer
 #  image_posts_id :integer
 #  main_image_id  :integer
 #  owner_id       :integer
 #
 # Indexes
 #
+#  index_kittens_on_followers_id    (followers_id)
 #  index_kittens_on_image_posts_id  (image_posts_id)
 #
 # Foreign Keys
 #
+#  followers_id    (followers_id => followers.id)
 #  image_posts_id  (image_posts_id => image_posts.id)
 #
 class Kitten < ApplicationRecord
   belongs_to :owner
   has_many :image_posts
+  has_many :followers, dependent: :destroy
 
   has_many :images, through: :image_posts, source: :image_attachment
 

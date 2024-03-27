@@ -1,10 +1,10 @@
 <ul><% @kittens.each do |kitten| %>
   <div class="stat-box">
-    <h2><%= link_to kitten.name, kitten %></h2>
+    <h2><%= link_to kitten.name, owner_kitten_path(kitten.owner, kitten) %></h2>
     <p><b>Age:</b> <%= kitten.age %> months</p>
   </div>
   <%= image_tag kitten.main_image, class: "kitten-picture" %>
   <hr>
 <% end %>
-<%= link_to "Add New Kitten", new_kitten_path %>
+<%= link_to "Add New Kitten", new_owner_kitten_path(@owner) %>
 </ul>

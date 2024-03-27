@@ -4,21 +4,23 @@ class ImagePostsController < ApplicationController
   end
 
   def create
-    @kitten = Kitten.find_by params[:kitten_id]
+    @kitten = Kitten.find_by id: params[:kitten_id]
+    @owner = Owner.find_by id: params[:owner_id]
     @post = ImagePost.new allowed_params
     @post.kitten = @kitten
-    @post.owner = @kitten.owner
+    @post.owner = @owner
 
     if @post.save
-      redirect_to kitten_image_post_path(@kitten, @post), notice: 'Post added sucessfully'
+      redirect_to owner_kitten_image_post_path(@owner, @kitten, @post), notice: 'Post added sucessfully'
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def show
-    @post = ImagePost.find params[:id]
-    @kitten = @post.kitten
+    @post = ImagePost.find_by id: params[:id]
+    @kitten = Kitten.find_by id: params[:kitten_id]
+    @owner = Owner.find_by id: params[:owner_id]
   end
 
   def edit
@@ -28,20 +30,22 @@ class ImagePostsController < ApplicationController
   def update
     @post = ImagePost.find params[:id]
     @kitten = @post.kitten
+    @owner = @kitten.owner
 
     if @post.update allowed_params
-      redirect_to kitten_image_post_path(@kitten, @post), notice: 'Post edited sucessfully'
+      redirect_to owner_kitten_image_post_path(@owner, @kitten, @post), notice: 'Post edited sucessfully'
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @post = ImagePost.find params[:id]
-    @kitten = @post.kitten
+    @post = ImagePost.find_by id: params[:id]
+    @kitten = Kitten.find_by id: params[:kitten_id]
+    @owner = Owner.find_by id: params[:owner_id]
 
     @post.destroy
-    redirect_to @kitten, status: :see_other, notice: 'Post Deleted!'
+    redirect_to owner_kitten_path(@owner, @kitten), notice: 'Post Deleted!', status: :see_other
   end
 
   private

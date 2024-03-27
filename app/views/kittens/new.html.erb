@@ -1,10 +1,10 @@
 <h2>Add A Kitten</h2>
-<%= form_with model: @kitten do |form| %>
+<%= form_with model: @kitten, url: new_owner_kitten_path do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name %>
   <br>
-  <%= form.label :main_image %>
-  <%= form.file_field :main_image %>
+  <%= form.label :profile_picture %>
+  <%= form.file_field :profile_picture %>
 
   <%= form.submit %>
 <% end %>

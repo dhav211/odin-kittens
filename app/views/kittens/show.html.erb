@@ -9,9 +9,9 @@
 <% else %>
   <div class="post-pic-link-grid">
     <% @kitten.images.each do |image| %>
-      <%= link_to(image_tag(image, class: "post-pic-link"), kitten_image_post_path(@kitten, ImagePost.find_by(id:image.record_id))) %>
+      <%= link_to(image_tag(image, class: "post-pic-link"), owner_kitten_image_post_path(@owner, @kitten, ImagePost.find_by(id:image.record_id))) %>
     <% end %>
   </div>
 <% end %>
 
-<%= link_to 'Add Another Post', new_kitten_image_post_path(@kitten) %>
+<%= link_to 'Add Another Post', new_owner_kitten_image_post_path(@owner, @kitten) %>

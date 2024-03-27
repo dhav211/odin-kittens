@@ -28,6 +28,7 @@ class Kitten < ApplicationRecord
   has_many :followers, dependent: :destroy
 
   has_many :images, through: :image_posts, source: :image_attachment
+  has_one_attached :profile_picture
 
   def main_image
     img = images.find_by(id: main_image_id)

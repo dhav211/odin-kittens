@@ -6,16 +6,21 @@ body {
 header, main {
     width: min(950px, 90%);
     margin: 0 auto;
+    padding: 0 .5rem;
 }
 
 header {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center;    
+    background-color: #E0FBFC;
+    border-radius: 1rem;
+    padding-bottom: 1rem;
+    position: relative;
+    top: 1rem;
 }
 
 main {
-    padding: 0 .5rem;
     background-color: white;
     display: flex;
     align-items: center;
@@ -45,9 +50,6 @@ ul {
 
 .user-container {
     width: 100%;
-    padding: 1rem 0.5rem;
-    background-color: #E0FBFC;
-    border-radius: 1rem 1rem 0 0;
     text-align: right;
 }
 
@@ -92,6 +94,27 @@ ul {
 .post-pic-link-grid {
     width: min(750px, 90%);
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1rem;
+}
+
+.owner-profile-kitten-grid {
+    width: min(750px, 90%);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 500px));
+    gap: 1rem;
+    justify-content: center;
+}
+
+.owner-profile-kitten-picture {
+    width: 100%;
+    border-radius: 1rem 1rem 0 0;
+    object-fit: contain;
+}
+
+.owner-kitten-profile-card {
+    width: 100%;
+    background-color: #a0b2a6;
+    border-radius: 1rem;
+    text-align: center;
 }

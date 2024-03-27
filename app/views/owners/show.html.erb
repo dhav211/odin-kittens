@@ -1,0 +1,15 @@
+<h2>Your kittens</h2>
+<% if @owner.kittens.empty? %>
+    <p>:( you don't have any kittens!</p>
+<% else %>
+  <div class="owner-profile-kitten-grid">
+    <% @owner.kittens.each do |kitten| %>
+      <div class="owner-kitten-profile-card">
+        <%= link_to(image_tag(kitten.main_image, class: "owner-profile-kitten-picture"), owner_kitten_path(@owner)) %>
+        <%= kitten.name %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<%= link_to 'Got a new kitten?', new_owner_kitten_path(@owner) %>
+<h2>The Kitten Feed</h2>

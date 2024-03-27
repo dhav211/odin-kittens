@@ -4,16 +4,16 @@
   <div class="post-body"><%= @post.body %></div>
 <% end %>
 <span>
-  <% unless @post.first? %> <%= link_to 'Previous', kitten_image_post_path(@kitten, ImagePost.previous(@post)) %> <% end %>
-  <%= link_to 'Back To Kitten\'s Page', @kitten %>
-  <% unless @post.last? %> <%= link_to 'Next', kitten_image_post_path(@kitten, ImagePost.next(@post)) %> <% end %>
+  <% unless @post.first? %> <%= link_to 'Previous', owner_kitten_image_post_path(@owner, @kitten, ImagePost.previous(@post)) %> <% end %>
+  <%= link_to 'Back To Kitten\'s Page', owner_kitten_path(@owner, @kitten) %>
+  <% unless @post.last? %> <%= link_to 'Next', owner_kitten_image_post_path(@owner, @kitten, ImagePost.next(@post)) %> <% end %>
 </span>
 <% if current_user_kitten_owner? @kitten %>
   <div class="manage-image-post-container">
     <span>
       <%= link_to 'Make Kitten\'s Profile Image', set_kitten_main_image_path, data: { turbo_method: :patch} %>
-      <%= link_to 'Edit Post', edit_kitten_image_post_path %>
-      <%= link_to 'Delete Post', kitten_image_post_path, data: { turbo_method: :delete } %>
+      <%= link_to 'Edit Post', edit_owner_kitten_image_post_path %>
+      <%= link_to 'Delete Post', owner_kitten_image_post_path, data: { turbo_method: :delete } %>
     </span>
   </div>
 <% end %>

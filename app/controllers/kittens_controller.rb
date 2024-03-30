@@ -6,16 +6,22 @@ class KittensController < ApplicationController
 
   def new
     @kitten = Kitten.new
+    @owner = Owner.find_by id: params[:owner_id]
   end
 
   def create
     @kitten = Kitten.new allowed_params
+    @kitten.owner = Owner.find_by id: params[:owner_id]
 
     if @kitten.save
-      @kitten.images.attach params[:kitten][:main_image] if params.dig(:kitten, :main_image).present?
-      redirect_to @kitten, notice: 'Your kitten has been added!'
+      if params.dig(:kitten, :profile_picture).present?
+        @kitten.profile_picture.attach params[:kitten][:profile_picture]
+        post = @kitten.image_posts.create(owner: @kitten.owner, kitten: @kitten)
+        post.image.attach params[:kitten][:profile_picture]
+        post.save
+      end
+      redirect_to owner_kitten_path(@kitten.owner, @kitten), notice: 'Your kitten has been added!'
     else
-      raise
       render :new, status: :unprocessable_entity
     end
   end
@@ -36,17 +42,11 @@ class KittensController < ApplicationController
     redirect_to @kitten
   end
 
-  def set_main_image
-    @kitten = Kitten.find_by id: params[:kitten_id]
-    post = ImagePost.find_by id: params[:id]
-    @kitten.update(main_image_id: post.image.id)
-    redirect_to @kitten
-  end
-
   def set_profile_picture
     @kitten = Kitten.find_by id: params[:kitten_id]
     post = ImagePost.find_by id: params[:id]
-    #@kitten.update(profile_picture: )
+    @kitten.profile_picture.attach post.image_blob
+    @kitten.save
   end
 
   private

@@ -9,8 +9,7 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
 
+  patch 'owners/:owner_id/kittens/:kitten_id/set_profile_picture/:id', to: 'kittens#set_profile_picture', as: 'set_kitten_profile_picture'
 
-  patch '/kittens/:kitten_id/set_main_image/:id', to: 'kittens#set_main_image', as: 'set_kitten_main_image'
-
-  root 'kittens#index'
+  root 'owners#index'
 end

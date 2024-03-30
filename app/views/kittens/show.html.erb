@@ -1,9 +1,9 @@
-<%= image_tag @kitten.main_image, class: "kitten-picture" %>
+<%= image_tag @kitten.profile_picture, class: "kitten-picture" %>
 <div class="stat-box">
   <h2><%= @kitten.name %></h2>
   <p><b>Age:</b> <%= @kitten.age %> months</p>
 </div>
-<%= follow_or_unfollow_button(@kitten, @follower) %>
+<%= follow_or_unfollow_button(@owner, @kitten, @follower) %>
 <% if @kitten.images.empty? %>
   <p>No images of this poor kitten!</p>
 <% else %>

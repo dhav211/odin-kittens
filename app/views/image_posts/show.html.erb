@@ -11,7 +11,7 @@
 <% if current_user_kitten_owner? @kitten %>
   <div class="manage-image-post-container">
     <span>
-      <%= link_to 'Make Kitten\'s Profile Image', set_kitten_main_image_path, data: { turbo_method: :patch} %>
+      <%= link_to 'Make Kitten\'s Profile Image', set_kitten_profile_picture_path, data: { turbo_method: :patch} %>
       <%= link_to 'Edit Post', edit_owner_kitten_image_post_path %>
       <%= link_to 'Delete Post', owner_kitten_image_post_path, data: { turbo_method: :delete } %>
     </span>

@@ -14,4 +14,6 @@
   </div>
 <% end %>
 
-<%= link_to 'Add Another Post', new_owner_kitten_image_post_path(@owner, @kitten) %>
+<% if current_user_kitten_owner? @kitten %>
+  <%= link_to 'Add Another Post', new_owner_kitten_image_post_path(@owner, @kitten) %>
+<% end %>

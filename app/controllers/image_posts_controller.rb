@@ -1,4 +1,7 @@
 class ImagePostsController < ApplicationController
+  before_action :authenticate_owner!, only: %i[new create edit update destroy]
+  before_action :kitten_owner_signed_in, only: %i[new create edit update destroy]
+
   def new
     @post = ImagePost.new
   end
@@ -52,5 +55,14 @@ class ImagePostsController < ApplicationController
 
   def allowed_params
     params.require(:image_post).permit(:body, :title, :image, :kitten_id, :owner)
+  end
+
+  def kitten_owner_signed_in
+    @kitten = Kitten.find_by id: params[:kitten_id]
+    @owner = Owner.find_by id: params[:owner_id]
+
+    return if current_owner == @owner
+
+    redirect_to owner_kitten_path(@owner, @kitten), alert: "You\'re not the owner of this #{@kitten.name}"
   end
 end

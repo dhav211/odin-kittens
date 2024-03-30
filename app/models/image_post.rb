@@ -32,11 +32,11 @@ class ImagePost < ApplicationRecord
     errors.add(:title, 'must upload image') unless image.attached?
   end
 
-  def first?
-    ImagePost.first.id == id
+  def first?(kitten)
+    kitten.image_posts.first.id == id
   end
 
-  def last?
-    ImagePost.last.id == id
+  def last?(kitten)
+    kitten.image_posts.last.id == id
   end
 end

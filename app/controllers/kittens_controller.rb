@@ -1,4 +1,7 @@
 class KittensController < ApplicationController
+  before_action :authenticate_owner!, only: %i[new create update]
+  before_action :correct_owner_signed_in, only: %i[new create update]
+
   def index
     @kittens = Kitten.all
     @owner = Owner.find_by id: params[:owner_id]
@@ -53,5 +56,12 @@ class KittensController < ApplicationController
 
   def allowed_params
     params.require(:kitten).permit(:name, :images, :profile_picture)
+  end
+
+  def correct_owner_signed_in
+    @owner = Owner.find_by(id: params[:owner_id])
+    return if current_owner == @owner
+
+    redirect_to @owner, alert: "You\'re not this user!"
   end
 end

@@ -1,0 +1,8 @@
+<h2>Your kittens</h2>
+<% if @owner.kittens.empty? %>
+    <p>:( you don't have any kittens!</p>
+<% else %>
+  <%= render 'owner_kitten_links' %>
+<% end %>
+<%= link_to 'Got a new kitten?', new_owner_kitten_path(@owner) %>
+<h2>The Kitten Feed</h2>

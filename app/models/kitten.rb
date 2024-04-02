@@ -3,7 +3,9 @@
 # Table name: kittens
 #
 #  id             :integer          not null, primary key
-#  age            :integer
+#  color          :string
+#  date_of_birth  :datetime
+#  gender         :string
 #  name           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
@@ -31,6 +33,10 @@ class Kitten < ApplicationRecord
   has_one_attached :profile_picture
 
   validate :acceptable_image
+
+  def age
+    (Time.now - date_of_birth) / 31_556_952
+  end
 
   def acceptable_image
     errors.add(:title, 'must upload image') unless profile_picture.attached?

@@ -1,7 +1,9 @@
 <%= image_tag @kitten.profile_picture, class: "kitten-picture" %>
 <div class="stat-box">
   <h2><%= @kitten.name %></h2>
-  <p><b>Age:</b> <%= @kitten.age %> months</p>
+  <p><b>Age:</b> <%= pluralize(@kitten.age.floor, 'year') %> old</p>
+  <p><b>Color:</b> <%= @kitten.color %> </p>
+  <p><b>Gender:</b> <%= @kitten.gender %></p>
 </div>
 <%= follow_or_unfollow_button(@owner, @kitten, @follower) %>
 <% if @kitten.images.empty? %>

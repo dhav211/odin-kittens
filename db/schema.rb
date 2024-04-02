@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_24_020114) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_31_164447) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -59,13 +59,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_24_020114) do
 
   create_table "kittens", force: :cascade do |t|
     t.string "name"
-    t.integer "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "main_image_id"
     t.integer "owner_id"
     t.integer "image_posts_id"
     t.integer "followers_id"
+    t.datetime "date_of_birth"
+    t.string "color"
+    t.string "gender"
     t.index ["followers_id"], name: "index_kittens_on_followers_id"
     t.index ["image_posts_id"], name: "index_kittens_on_image_posts_id"
   end

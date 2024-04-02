@@ -3,7 +3,9 @@
 # Table name: kittens
 #
 #  id             :integer          not null, primary key
-#  age            :integer
+#  color          :string
+#  date_of_birth  :datetime
+#  gender         :string
 #  name           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :owners
   resources :owners, only: %i[show] do
     resources :kittens do
-      resources :image_posts, only: %i[new show create destroy edit update]
+      resources :image_posts, only: %i[new show create destroy edit update] do
+        resources :likes, only: %i[create destroy]
+      end
       resources :followers, only: %i[create destroy]
     end
   end

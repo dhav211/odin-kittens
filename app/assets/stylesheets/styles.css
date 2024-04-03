@@ -119,3 +119,46 @@ ul {
     border-radius: 1rem;
     text-align: center;
 }
+
+.feed-card {
+    width: min(750px, 90%);
+    background-color: #a0b2a6;
+    border-radius: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.feed-card-info-container {
+    display: flex;
+    padding: .5rem 2rem;
+    justify-content: space-between;
+}
+
+.feed-card-icon-container {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.feed-card-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.thumb-up-blue {
+    filter: invert(50%) sepia(47%) saturate(826%) hue-rotate(169deg) brightness(103%) contrast(98%);
+}
+
+.like-button-container {
+    display: flex;
+    gap: .5rem;
+    background-color: #33a1fd;
+    padding: .5rem 1rem;
+    margin: 1rem 0;
+    border-radius: 1rem;
+}
+
+.like-button {
+    text-decoration: none;
+    color: black;
+}

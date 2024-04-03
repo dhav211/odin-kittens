@@ -2,7 +2,7 @@
 #
 # Table name: kittens
 #
-#  id             :integer          not null, primary key
+#  id             :bigint           not null, primary key
 #  color          :string
 #  date_of_birth  :datetime
 #  gender         :string
@@ -21,8 +21,8 @@
 #
 # Foreign Keys
 #
-#  followers_id    (followers_id => followers.id)
-#  image_posts_id  (image_posts_id => image_posts.id)
+#  fk_rails_...  (followers_id => followers.id)
+#  fk_rails_...  (image_posts_id => image_posts.id)
 #
 class Kitten < ApplicationRecord
   belongs_to :owner

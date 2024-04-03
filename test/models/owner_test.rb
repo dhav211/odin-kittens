@@ -2,7 +2,7 @@
 #
 # Table name: owners
 #
-#  id                     :integer          not null, primary key
+#  id                     :bigint           not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  remember_created_at    :datetime
@@ -19,7 +19,7 @@
 #
 # Foreign Keys
 #
-#  kittens_id  (kittens_id => kittens.id)
+#  fk_rails_...  (kittens_id => kittens.id)
 #
 require "test_helper"
 

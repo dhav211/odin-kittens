@@ -6,3 +6,12 @@
 <% end %>
 <%= link_to 'Got a new kitten?', new_owner_kitten_path(@owner) %>
 <h2>The Kitten Feed</h2>
+<% @owner.latest_following_posts.each do |post| %>
+  <div class="feed-card">
+    <%= link_to(image_tag(post.image, class: 'owner-profile-kitten-picture'), owner_kitten_image_post_path(@owner, post.kitten, post)) %>
+    <div class="feed-card-info-container">
+    <div class="feed-card-icon-container"><%= image_tag "thumb-up", class: "feed-card-icon" %> <%= post.likes.count %></div>
+    <div class="feed-card-icon-container"><%= image_tag "comment", class: "feed-card-icon" %> 12</div>
+    </div>
+  </div>
+<% end %>

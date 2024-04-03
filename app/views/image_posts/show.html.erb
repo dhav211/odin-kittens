@@ -3,6 +3,25 @@
 <% unless @post.body.nil? %>
   <div class="post-body"><%= @post.body %></div>
 <% end %>
+
+<% if current_owner_liked_post?(@post) %>
+  <%= link_to owner_kitten_image_post_like_path(@owner, @kitten, @post), data: { turbo_method: :delete}, class: "like-button" do %>
+    <div class="like-button-container">
+      <%= image_tag 'thumb-up', class: 'feed-card-icon ' %>
+      Unlike
+      <%= @post.likes.count %>
+    </div>
+  <% end %>
+<% else %>
+  <%= link_to owner_kitten_image_post_likes_path(@owner, @kitten, @post), data: { turbo_method: :post}, class: "like-button" do %>
+    <div class="like-button-container">
+      <%= image_tag 'thumb-up', class: 'feed-card-icon ' %>
+      Like
+      <%= @post.likes.count %>
+    </div>
+  <% end %>
+<% end %>
+
 <span>
   <% unless @post.first? @kitten %> <%= link_to 'Previous', owner_kitten_image_post_path(@owner, @kitten, ImagePost.previous(@post)) %> <% end %>
   <%= link_to 'Back To Kitten\'s Page', owner_kitten_path(@owner, @kitten) %>

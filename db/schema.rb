@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_31_164447) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_03_005231) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -53,7 +56,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_164447) do
     t.integer "owner_id", null: false
     t.text "body"
     t.string "title"
+    t.bigint "likes_id"
     t.index ["kitten_id"], name: "index_image_posts_on_kitten_id"
+    t.index ["likes_id"], name: "index_image_posts_on_likes_id"
     t.index ["owner_id"], name: "index_image_posts_on_owner_id"
   end
 
@@ -70,6 +75,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_164447) do
     t.string "gender"
     t.index ["followers_id"], name: "index_kittens_on_followers_id"
     t.index ["image_posts_id"], name: "index_kittens_on_image_posts_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "image_post_id", null: false
+    t.bigint "owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["image_post_id"], name: "index_likes_on_image_post_id"
+    t.index ["owner_id"], name: "index_likes_on_owner_id"
   end
 
   create_table "owners", force: :cascade do |t|
@@ -90,8 +104,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_164447) do
   add_foreign_key "followers", "kittens"
   add_foreign_key "followers", "owners"
   add_foreign_key "image_posts", "kittens"
+  add_foreign_key "image_posts", "likes", column: "likes_id"
   add_foreign_key "image_posts", "owners"
   add_foreign_key "kittens", "followers", column: "followers_id"
   add_foreign_key "kittens", "image_posts", column: "image_posts_id"
+  add_foreign_key "likes", "image_posts"
+  add_foreign_key "likes", "owners"
   add_foreign_key "owners", "kittens", column: "kittens_id"
 end

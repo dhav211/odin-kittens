@@ -1,0 +1,10 @@
+<%# add drop down where you can choose one of the uploaded images %>
+
+  <div class="profile-picture-change-selection-container">
+    <% kitten.images.each do |image| %>
+      <label class='profile-picture-change-selection'>
+        <%= form.radio_button :profile_picture_id, image.id, { checked: kitten.profile_picture_selected?(image.id) } %>
+        <%= image_tag image %>
+      </label>
+    <% end %>
+  </div>

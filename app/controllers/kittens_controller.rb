@@ -17,12 +17,7 @@ class KittensController < ApplicationController
     @kitten.owner = Owner.find_by id: params[:owner_id]
 
     if @kitten.save
-      if params.dig(:kitten, :profile_picture).present?
-        @kitten.profile_picture.attach params[:kitten][:profile_picture]
-        post = @kitten.image_posts.create(owner: @kitten.owner, kitten: @kitten)
-        post.image.attach params[:kitten][:profile_picture]
-        post.save
-      end
+      attach_inital_profile_picture(@kitten) if params.dig(:kitten, :profile_picture).present?
       redirect_to owner_kitten_path(@kitten.owner, @kitten), notice: 'Your kitten has been added!'
     else
       render :new, status: :unprocessable_entity
@@ -33,16 +28,20 @@ class KittensController < ApplicationController
     @kitten = Kitten.find_by id: params[:id]
     @owner = @kitten.owner
     @signed_in_owner = current_owner
-    @follower = @kitten.followers.find_by owner_id:@signed_in_owner.id unless @signed_in_owner.nil?
+    @follower = @kitten.followers.find_by owner_id: @signed_in_owner.id unless @signed_in_owner.nil?
+  end
+
+  def edit
+    @kitten = Kitten.find_by id: params[:id]
+    @owner = Owner.find_by id: params[:owner_id]
   end
 
   def update
     @kitten = Kitten.find_by id: params[:id]
-
     return unless @kitten.update allowed_params
 
     @kitten.images.attach params[:kitten][:images] if params.dig(:kitten, :images).present?
-    redirect_to @kitten
+    redirect_to owner_kitten_path(@kitten.owner, @kitten)
   end
 
   def set_profile_picture
@@ -55,7 +54,7 @@ class KittensController < ApplicationController
   private
 
   def allowed_params
-    params.require(:kitten).permit(:name, :images, :profile_picture)
+    params.require(:kitten).permit(:name, :images, :date_of_birth, :color, :gender, :profile_picture_id)
   end
 
   def correct_owner_signed_in
@@ -63,5 +62,11 @@ class KittensController < ApplicationController
     return if current_owner == @owner
 
     redirect_to @owner, alert: "You\'re not this user!"
+  end
+
+  def attach_inital_profile_picture(kitten)
+    post = kitten.image_posts.create(owner: kitten.owner, kitten: kitten)
+    post.image.attach params[:kitten][:profile_picture]
+    post.save
   end
 end

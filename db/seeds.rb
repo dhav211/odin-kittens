@@ -5,10 +5,7 @@ bubbles.kittens << Kitten.create(
   date_of_birth: DateTime.new(2018, 1, 1),
   color: 'Black And White',
   gender: 'Female',
-  profile_picture: { 
-    io: File.open("#{Rails.root}/app/assets/images/christmas_pickles.jpg"),
-    filename: 'christmas_pickles.jpg'
-  }
+  profile_picture_id: 1
 )
 
 pickles = bubbles.kittens.first
@@ -27,6 +24,29 @@ pickles.image_posts << ImagePost.create(
   owner: bubbles
 )
 
+pickles.image_posts << ImagePost.create(
+  title: 'Naughty Kitty',
+  body: 'Did I do that?',
+  image: { io: File.open("#{Rails.root}/app/assets/images/naughty.jpg"), filename: 'naughty.jpg' },
+  owner: bubbles
+)
+
+pickles.image_posts << ImagePost.create(
+  image: { io: File.open("#{Rails.root}/app/assets/images/smashed.jpg"), filename: 'smashed.jpg' },
+  owner: bubbles
+)
+
+pickles.image_posts << ImagePost.create(
+  title: 'Watching, Waiting',
+  image: { io: File.open("#{Rails.root}/app/assets/images/prey.jpg"), filename: 'prey.jpg' },
+  owner: bubbles
+)
+
+pickles.image_posts << ImagePost.create(
+  image: { io: File.open("#{Rails.root}/app/assets/images/what.jpg"), filename: 'what.jpg' },
+  owner: bubbles
+)
+
 cat_master = Owner.create(username: 'cat_master', email: 'cat_master@email.com', password: 'password')
 
 cat_master.kittens << Kitten.create(
@@ -34,10 +54,7 @@ cat_master.kittens << Kitten.create(
   date_of_birth: DateTime.new(2017, 5, 1),
   color: 'Grey',
   gender: 'Female',
-  profile_picture: {
-    io: File.open("#{Rails.root}/app/assets/images/blanket.jpg"),
-    filename: 'blanket.jpg'
-  }
+  profile_picture_id: 1
 )
 
 fluffy = cat_master.kittens.first
@@ -71,10 +88,7 @@ mongoosebelong.kittens << Kitten.create(
   date_of_birth: DateTime.new(2016, 3, 8),
   color: 'Ginger',
   gender: 'Male',
-  profile_picture: {
-    io: File.open("#{Rails.root}/app/assets/images/table_cat.jpg"),
-    filename: 'table_cat.jpg'
-  }
+  profile_picture_id: 1
 )
 
 tommy = mongoosebelong.kittens.first
@@ -121,10 +135,7 @@ threatenedcheesesteak.kittens << Kitten.create(
   date_of_birth: DateTime.new(2019, 1, 1),
   color: 'Tabby',
   gender: 'Male',
-  profile_picture: { 
-    io: File.open("#{Rails.root}/app/assets/images/yoohoo.jpg"),
-    filename: 'yoohoo.jpg'
-  }
+  profile_picture_id: 1
 )
 
 whiskers = threatenedcheesesteak.kittens.first
@@ -149,10 +160,7 @@ threatenedcheesesteak.kittens << Kitten.create(
   date_of_birth: DateTime.new(2017, 7, 1),
   color: 'White',
   gender: 'Female',
-  profile_picture: { 
-    io: File.open("#{Rails.root}/app/assets/images/snowball.jpg"),
-    filename: 'snowball.jpg'
-  }
+  profile_picture_id: 1
 )
 
 snowball = threatenedcheesesteak.kittens.last

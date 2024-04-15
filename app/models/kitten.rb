@@ -2,17 +2,17 @@
 #
 # Table name: kittens
 #
-#  id             :bigint           not null, primary key
-#  color          :string
-#  date_of_birth  :datetime
-#  gender         :string
-#  name           :string
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  followers_id   :integer
-#  image_posts_id :integer
-#  main_image_id  :integer
-#  owner_id       :integer
+#  id                 :bigint           not null, primary key
+#  color              :string
+#  date_of_birth      :datetime
+#  gender             :string
+#  name               :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  followers_id       :integer
+#  image_posts_id     :integer
+#  owner_id           :integer
+#  profile_picture_id :integer
 #
 # Indexes
 #
@@ -30,16 +30,28 @@ class Kitten < ApplicationRecord
   has_many :followers, dependent: :destroy
 
   has_many :images, through: :image_posts, source: :image_attachment
-  has_one_attached :profile_picture
 
-  validate :acceptable_image
+  GENDERS = ['Male', 'Female', 'Not Sure'].freeze
+  COLORS = ['White', 'Black', 'Black And White', 'Tabby', 'Ginger', 'Grey'].freeze
 
+  validates :name, presence: true
+  validates :date_of_birth, presence: true
+  validates :gender, presence: true
+  validates :gender, inclusion: { in: GENDERS, message: '%{value} is not a valid gender choice' }
+  validates :color, presence: true
+  validates :color, inclusion: { in: COLORS, message: '%{value} is not a valid color' }
+
+  # Get the number of years the kitten has been alive
   def age
     (Time.now - date_of_birth) / 31_556_952
   end
 
+  def profile_picture
+    images.find profile_picture_id
+  end
+
   def acceptable_image
-    errors.add(:title, 'must upload image') unless profile_picture.attached?
+    errors.add(:profile_picture, 'must be uploaded') unless profile_picture.attached?
   end
 
   def main_image
@@ -52,5 +64,9 @@ class Kitten < ApplicationRecord
     else
       img
     end
+  end
+
+  def profile_picture_selected?(picture_id)
+    profile_picture_id == picture_id
   end
 end

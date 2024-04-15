@@ -2,17 +2,17 @@
 #
 # Table name: kittens
 #
-#  id             :bigint           not null, primary key
-#  color          :string
-#  date_of_birth  :datetime
-#  gender         :string
-#  name           :string
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  followers_id   :integer
-#  image_posts_id :integer
-#  main_image_id  :integer
-#  owner_id       :integer
+#  id                 :bigint           not null, primary key
+#  color              :string
+#  date_of_birth      :datetime
+#  gender             :string
+#  name               :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  followers_id       :integer
+#  image_posts_id     :integer
+#  owner_id           :integer
+#  profile_picture_id :integer
 #
 # Indexes
 #
